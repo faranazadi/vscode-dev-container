@@ -1,0 +1,29 @@
+{
+    "name": "Ubuntu",
+    "runArgs": [
+    ],
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "settings": {
+        "workbench.colorTheme": "Nord"
+    },
+    "extensions": [
+        "eamodio.gitlens",
+        "redhat.vscode-yaml",
+        "hashicorp.terraform",
+        "redhat.ansible",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-vscode.vscode-typescript-next"
+    ]
+    
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "pip3 install --user -r requirements.txt",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
