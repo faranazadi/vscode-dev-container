@@ -17,6 +17,9 @@ ARG TYPESCRIPT_VERSION="4.8.4" # https://www.npmjs.com/package/typescript
 ARG NODEJS_VERSION="19.x" # https://github.com/nodesource/distributions/blob/master/README.md#debinstall
 ARG ANSIBLE_VERSION="6.5.0" # https://pypi.org/project/ansible/#history
 
+# Copy dotfiles over
+COPY /dotfiles/ /home/${USERNAME}/
+
 # Copy scripts over - included them in this repo because not every release on Microsoft's GitHub repo seems to include them
 COPY /library-scripts/ /tmp/library-scripts/
 RUN groupadd ssh
@@ -51,16 +54,9 @@ RUN curl -L https://get.pulumi.com/releases/sdk/pulumi-v${PULUMI_VERSION}-linux-
 # Install Terraform
 RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip --output /tmp/downloads/terraform.zip --create-dirs && sudo unzip /tmp/downloads/terraform.zip -d /usr/local/bin/
 
-# Create directories to be mapped to volumes
-RUN mkdir --parents /home/${USERNAME}/workspace /home/${USERNAME}/.docker /home/${USERNAME}/.aws /home/${USERNAME}/.awsvault
-RUN chown --recursive ${USERNAME}:${USERNAME} /home/${USERNAME}/workspace /home/${USERNAME}/.docker /home/${USERNAME}/.aws /home/${USERNAME}/.awsvault
-
-# Define volumes at the following paths - containers using this image will automatically mount a volume to these directories
-VOLUME [ "/home/${USERNAME}/workspace" ]
-VOLUME [ "/home/${USERNAME}/.docker" ]
-VOLUME [ "/home/${USERNAME}/.aws" ]
-VOLUME [ "/home/${USERNAME}/.awsvault" ]
-VOLUME [ "/var/lib/docker" ]
+# Create directories to be mapped to volumes or be used as bind mounts
+RUN mkdir --parents /workspace/ /home/${USERNAME}/.aws /home/${USERNAME}/.ssh 
+RUN chown --recursive ${USERNAME}:${USERNAME} /workspace/ /home/${USERNAME}/.aws /home/${USERNAME}/.ssh
 
 # Change to normal user as pip can bork out when using root
 USER ${USERNAME}

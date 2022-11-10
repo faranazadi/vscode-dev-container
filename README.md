@@ -20,30 +20,6 @@ This is a somewhat 'beefy' container, and might possibly be an anti-pattern to w
 * Dev Containers Extension (Extension ID: ms-vscode-remote.remote-containers). See Microsoft's docs [here](https://code.visualstudio.com/docs/devcontainers/containers).
 
 ## Installation and Usage
-### Manual Method
-Once you have cloned this repository, you need to build the Docker image. After making sure that the Docker daemon is running, in the root dir of the repo, enter the following command:
-
-```bash
-docker build --pull --rm -f ".devcontainer/Dockerfile" -t devcontainer:latest ".devcontainer"
-```
-
-This should take a couple of minutes. After it has completed, to fire up a container and its associated volumes, enter:
-```bash
-    docker run \
-    --init \
-    --privileged \
-    --interactive \
-    --tty \
-    --detach \
-    --name CONTAINER_NAME_HERE \
-    --v CONTAINER_NAME_HERE-workspace:/home/developer/workspace \
-    --v CONTAINER_NAME_HERE-dockerconfig:/home/developer/.docker \
-    --v CONTAINER_NAME_HERE-aws:/home/developer/.aws \
-    --v CONTAINER_NAME_HERE-awsvault:/home/developer/.awsvault \
-    --v CONTAINER_NAME_HERE-docker:/var/lib/docker \
-    "devcontainer:latest" 
-```
-
 ### Automated Method
 Open VSCode within the context of this repo and you will be prompted with the following message/notification: 
 

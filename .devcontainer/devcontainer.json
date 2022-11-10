@@ -1,11 +1,20 @@
 {
-    "name": "Ubuntu",
+    "name": "UbuntuDevContainer",
     "runArgs": [
     ],
     "build": {
         "dockerfile": "Dockerfile"
     },
+    "workspaceMount": "source=devcontainer-workspace,target=/workspace/,type=volume",
+    "workspaceFolder": "/workspace",
+    "mounts": [
+        "source=/home/user/.ssh,target=/home/developer/.ssh,type=bind,consistency=cached",
+        "source=/home/user/.aws,target=/home/developer/.aws,type=bind,consistency=cached",
+        "source=devcontainer-profile,target=/root,type=volume",
+		"target=/root/.vscode-server,type=volume"
+    ],
     "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
     },
     "extensions": [
         "eamodio.gitlens",
