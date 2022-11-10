@@ -6,7 +6,6 @@
         "dockerfile": "Dockerfile"
     },
     "settings": {
-        "workbench.colorTheme": "Nord"
     },
     "extensions": [
         "eamodio.gitlens",
